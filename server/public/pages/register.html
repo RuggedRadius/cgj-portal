@@ -1,19 +1,21 @@
 <h1 class="page-header">REGISTER</h1>
 
-<form action="/register" method="POST" id="form-new-user">
-    <p>
-      <label for="username">Username:</label>
-      <input type="text" id="username" name="username" required>
-    </p>
-    <p>
-      <label for="email">Email:</label>
-      <input type="email" id="email" name="email" required>
-    </p>
-    <p>
-      <label for="password">Password:</label>
-      <input type="password" id="password" name="password" required>
-    </p>
+<div class="page-section">
+  <form action="/register" method="POST" id="form-new-user">
+      <p>
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required>
+      </p>
+      <p>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+      </p>
+      <p>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+      </p>
 
-    <input value="Register" id="submit-user" onclick="submitNewUser()">
+      <input value="Register" id="submit-user" onclick="submitNewUser()">
 
-</form>
+  </form>
+</div>

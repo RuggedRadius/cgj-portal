@@ -29,6 +29,8 @@ body
   background-color: black;
   color: white;
   transition-duration: 0.5s;
+
+  caret-color: transparent;
 }
 
 #nav-toggle-btns
@@ -129,7 +131,15 @@ body
 .table-output
 {
   margin: auto;
-  width: 80%;
+  width: 100%;
+}
+
+.table-output thead
+{
+  color: black;
+  background-color: white;
+  font-weight: bold;
+  text-align: center;
 }
 
 .table-output td
@@ -172,5 +182,4 @@ input
   padding: 40px;
   margin: auto;
   background-color: rgba(0,0,0,0.5);
-
 }

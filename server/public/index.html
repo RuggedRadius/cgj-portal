@@ -55,18 +55,24 @@
             <ul>              
               <li onclick="showPageContents('home');" class="clickable-link">HOME</li>
               <li onclick="showPageContents('gallery');" class="clickable-link">GALLERY</li>
-              <li onclick="showPageContents('blog');" class="clickable-link">BLOG</li>
-              <li onclick="showPageContents('scoring');" class="clickable-link">SCORING</li>
-              <li>PARTICIPANTS
-                <ul>
-                  <li onclick="showPageContents('register');" class="clickable-link">Register</li>
-                  <li onclick="showPageContents('participants');" class="clickable-link">View Participants</li>
+              <!-- <li onclick="showPageContents('blog');" class="clickable-link">BLOG</li> -->
+              <!-- <li onclick="showPageContents('scoring');" class="clickable-link">SCORING</li> -->
+              <li onclick="toggleScoringMenu()" id="menu-folder-scoring">► SCORING
+                <ul id="menu-parent-scoring">
+                  <!-- <li onclick="showPageContents('scoring');" class="clickable-link">Information</li>
+                  <li onclick="showPageContents('submitScore');" class="clickable-link">Submit a Score</li> -->
+                </ul>
+              </li>   
+              <li onclick="toggleParticipantsMenu()" id="menu-folder-participants">► PARTICIPANTS
+                <ul id="menu-parent-participants">
+                  <!-- <li onclick="showPageContents('register');" class="clickable-link">Register</li>
+                  <li onclick="showPageContents('participants');" class="clickable-link">View Participants</li> -->
                 </ul>
               </li>              
-              <li>THEMES
-                <ul>
-                  <li onclick="showPageContents('submitTheme');" class="clickable-link">Submit a Theme</li>
-                  <li onclick="showPageContents('themes');" class="clickable-link">View Themes</li>
+              <li onclick="toggleThemesMenu()" id="menu-folder-themes">► THEMES
+                <ul id="menu-parent-themes">
+                  <!-- <li onclick="showPageContents('themes');" class="clickable-link">View Themes</li>
+                  <li onclick="showPageContents('submitTheme');" class="clickable-link">Submit a Theme</li>                   -->
                 </ul>
               </li>
             </ul>
