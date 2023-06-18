@@ -1,0 +1,13 @@
+<h1 class="page-header">SUBMIT A THEME</h1>
+
+<form action="/submitTheme" method="POST" id="form-new-theme">
+    <p>
+      <label for="description">Theme:</label>
+      <input type="text" id="description" name="description" required>
+    </p>
+
+    <input type="hidden" id="submittedBy" name="submittedBy" value="placeholderName" required>
+
+    <input value="Submit Theme" id="submit-theme" onclick="submitTheme()">
+
+</form>

@@ -10,6 +10,16 @@ const port = 3000;
 // Serve static files from the 'public' directory
 app.use(express.static(path.join(__dirname, 'public')));
 
+// Middleware to parse request bodies
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+app.use(session({
+  secret: 'your-secret-key',
+  resave: false,
+  saveUninitialized: false
+}));
+
 // Define a route to handle the client request for the root URL
 app.get('/', (req, res) => 
 {
@@ -32,15 +42,20 @@ app.get('/getAllUsers', (req, res) =>
   });
 });
 
-// Middleware to parse request bodies
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.get('/getAllThemes', (req, res) => 
+{
+  db.all('SELECT * FROM themes', (err, rows) => 
+  {
+    if (err) 
+    {
+      console.error(err.message);
+      res.status(500).send('Internal Server Error');
+      return;
+    }
 
-app.use(session({
-  secret: 'your-secret-key',
-  resave: false,
-  saveUninitialized: false
-}));
+    res.json(rows);
+  });
+});
 
 // Route to handle user registration form submission
 app.post('/register', (req, res) => 
@@ -50,6 +65,25 @@ app.post('/register', (req, res) =>
   // Perform the database insertion
   const query = 'INSERT INTO users (username, email, password) VALUES (?, ?, ?)';
   db.run(query, [username, email, password], function (err) 
+  {
+    if (err) 
+    {
+      console.error(err.message);
+      res.status(500).end();
+      return;
+    }
+
+    res.status(204).end();
+  });
+});
+
+app.post('/submitTheme', (req, res) => 
+{
+  const { description, submittedBy } = req.body;
+
+  // Perform the database insertion
+  const query = 'INSERT INTO themes (description, submitted_by) VALUES (?, ?)';
+  db.run(query, [description, submittedBy], function (err) 
   {
     if (err) 
     {

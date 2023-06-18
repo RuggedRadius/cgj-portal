@@ -11,6 +11,10 @@ function showPageContents(pageName)
                 case "participants":
                     getAllUsers();
                     break;
+
+                case "themes":
+                    getAllThemes();
+                    break;
             }
         })
         .catch(error => 
@@ -33,15 +37,47 @@ function getAllUsers()
         const rows = response.data;
   
         // Populate the table with the retrieved rows
-        rows.forEach((row) => {
-          const tr = document.createElement('tr');
-          tr.innerHTML = `
-            <td>${row.id}</td>
-            <td>${row.username}</td>            
-            <td>${row.email}</td>
-            <td>${row.password}</td>
-          `;
-          tbody.appendChild(tr);
+        rows.forEach((row) => 
+        {
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td>${row.id}</td>
+                <td>${row.username}</td>            
+                <td>${row.email}</td>
+                <td>${row.password}</td>
+            `;
+            tbody.appendChild(tr);
+        });
+      })
+      .catch((error) => 
+      {
+        alert(error);
+        console.error(error);
+      });
+}
+
+function getAllThemes() 
+{
+    console.log("Querying database for themes...");
+    // Get the HTML table body element
+    const tbody = document.querySelector('#tbl-themes tbody');
+  
+    // Make a request to the server to get all users
+    axios.get('/getAllThemes')
+      .then((response) => {
+        const rows = response.data;
+  
+        // Populate the table with the retrieved rows
+        rows.forEach((row) => 
+        {
+            console.log("Creating row");
+            const tr = document.createElement('tr');
+            tr.innerHTML = 
+            `
+                <td>${row.description}</td>
+                <td>${row.submitted_by}</td>    
+            `;
+            tbody.appendChild(tr);
         });
       })
       .catch((error) => 
