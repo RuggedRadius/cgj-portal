@@ -19,7 +19,7 @@ function showPageContents(pageName)
                 case "submitScore":
                     populateParticipantsList();
                     populateVoteFields();
-                    document.getElementByI("submittedBy").value = sessionStorage.getItem("username");
+                    document.getElementById("submittedByID").value = sessionStorage.getItem("userID");
                     break;
             }
         })
@@ -83,6 +83,43 @@ function getAllThemes()
             `
                 <td>${row.description}</td>
                 <td>${row.submitted_by}</td>    
+            `;
+            tbody.appendChild(tr);
+        });
+      })
+      .catch((error) => 
+      {
+        alert(error);
+        console.error(error);
+      });
+}
+
+function getAllScores() 
+{
+    console.log("Querying database for scores...");
+    // Get the HTML table body element
+    const tbody = document.querySelector('#tbl-scores tbody');
+  
+    // Make a request to the server to get all users
+    axios.get('/getAllScores')
+      .then((response) => 
+      {
+        const rows = response.data;
+  
+        // Populate the table with the retrieved rows
+        rows.forEach((row) => 
+        {
+            console.log("Creating row");
+            const tr = document.createElement('tr');
+            tr.innerHTML = 
+            `
+                <td>${row.scoreId}</td>
+                <td>${row.submittedById}</td>    
+                <td>${row.participantId}</td>    
+                <td>${row.scoreGraphics}</td>    
+                <td>${row.scoreAudio}</td>    
+                <td>${row.scoreGameplay}</td>    
+                <td>${row.scoreThemeRelativity}</td>    
             `;
             tbody.appendChild(tr);
         });

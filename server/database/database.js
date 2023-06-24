@@ -64,10 +64,5 @@ function getAllUsers()
     });
 }
 
-function submitScore()
-{
-    
-}
-
 exports.createUser = createUser;
 exports.getAllUsers = getAllUsers;

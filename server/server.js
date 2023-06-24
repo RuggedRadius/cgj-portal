@@ -57,6 +57,21 @@ app.get('/getAllThemes', (req, res) =>
   });
 });
 
+app.get('/getAllScores', (req, res) => 
+{
+  db.all('SELECT * FROM scores', (err, rows) => 
+  {
+    if (err) 
+    {
+      console.error(err.message);
+      res.status(500).send('Internal Server Error');
+      return;
+    }
+
+    res.json(rows);
+  });
+});
+
 // Route to handle user registration form submission
 app.post('/register', (req, res) => 
 {
@@ -101,7 +116,7 @@ app.post('/login', (req, res) =>
     const { username, password } = req.body;
   
     // Query the database to retrieve the user's password
-    const query = 'SELECT password FROM users WHERE username = ?';
+    const query = 'SELECT * FROM users WHERE username = ?';
     db.get(query, [username], (err, row) => 
     {
         if (err) 
@@ -118,7 +133,7 @@ app.post('/login', (req, res) =>
 
             req.session.username = username;
 
-            res.status(200).json({ message: 'Login successful' });
+            res.json(row);
         } 
         else 
         {
@@ -138,6 +153,38 @@ app.post('/logout', (req, res) =>
     console.log(`User [${username}] has logged out.`);
 
     res.status(200).json({ message: 'Logout successful' });
+});
+
+app.post('/submitScore', (req, res) => 
+{
+  console.log("Submitting score...");
+  const 
+  { 
+    submittedById, 
+    participantId, 
+    scoreGraphics,
+    scoreAudio,
+    scoreGameplay,
+    scoreThemeRelativity
+  } = req.body;
+
+  // Perform the database insertion
+  const query = `
+  INSERT INTO scoreSubmissions
+  (submittedById, participantId, scoreGraphics, scoreAudio, scoreGameplay, scoreThemeRelativity)
+  VALUES 
+  (?, ?, ?, ?, ?, ?)`;
+  db.run(query, [submittedById, participantId, scoreGraphics, scoreAudio, scoreGameplay, scoreThemeRelativity], function (err) 
+  {
+    if (err) 
+    {
+      console.error(err.message);
+      res.status(500).end();
+      return;
+    }
+
+    res.status(204).end();
+  });
 });
 
 // Start the server

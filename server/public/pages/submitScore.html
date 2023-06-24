@@ -1,19 +1,32 @@
 <h1 class="page-header">SUBMIT A SCORE</h1>
 
 <div class="page-section">
-<form>
+<form action="/submitScore" method="POST" id="form-submit-score">
     <p>
         <label>Participant: </label>
         <select name="participant" id="submit-score-participants">
             <option value=""></option>
         </select>
     </p>
-
-    <label>Graphics<select name="graphics" id="graphics" class="vote-field"></select></label>
-    <label>Audio<select name="audio" id="audio" class="vote-field"></select></label>
-    <label>Gameplay<select name="gameplay" id="gameplay" class="vote-field"></select></label>
-    <label>Theme Relativity<select name="themeRelativity" id="themeRelativity" class="vote-field"></select></label>
+    <p>
+        <label>Graphics</label>
+        <select name="graphics" id="graphics" class="vote-field"></select>
+    </p>
+    <p>
+        <label>Audio</label>
+        <select name="audio" id="audio" class="vote-field"></select>
+    </p>
+    <p>
+        <label>Gameplay</label>
+        <select name="gameplay" id="gameplay" class="vote-field"></select>
+    </p>
+    <p>
+        <label>Theme Relativity</label>
+        <select name="themeRelativity" id="themeRelativity" class="vote-field"></select>
+    </p>
     <input type="hidden" id="submittedByID">
-    <input type="submit" value="Submit Score">
+    <div style="margin-top: 50px; text-align: center;">
+        <input type="button" value="Submit Score" onclick="submitScore()">
+    </div>
 </form>
 </div>

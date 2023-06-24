@@ -36,14 +36,17 @@ function handleLogin(credentials)
     axios.post('/login', credentials)
         .then(response => 
         {
+          if (response.status !== 500 || response.status !== 401)
+          {
             document.getElementById('login').style.display = 'none';
             document.getElementById('logout').style.display = 'block';
 
             var status = document.getElementById("login-status");
-            status.innerText = `LOGGED IN AS ${credentials.username}`;
+            status.innerText = `LOGGED IN AS ${response.data.username}`;
             status.style.color = 'green';
 
-            sessionStorage.setItem("userName", credentials.username);
+            sessionStorage.setItem("userID", response.data.id);
+            sessionStorage.setItem("userName", response.data.username);
 
             // Redirect to another page
             showPageContents('home');
@@ -54,6 +57,7 @@ function handleLogin(credentials)
                 title: 'Success',
                 text: response.data.message
             });
+          }
         })
         .catch(error => 
         {
@@ -77,6 +81,9 @@ function handleLogout()
         var status = document.getElementById("login-status");
         status.innerText = "NOT LOGGED IN";
         status.style.color = 'red';
+
+        sessionStorage.setItem("userID", null);
+        sessionStorage.setItem("userName", null);
 
         // Login successful
         Swal.fire({
