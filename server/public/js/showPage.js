@@ -15,6 +15,12 @@ function showPageContents(pageName)
                 case "themes":
                     getAllThemes();
                     break;
+
+                case "submitScore":
+                    populateParticipantsList();
+                    populateVoteFields();
+                    document.getElementByI("submittedBy").value = sessionStorage.getItem("username");
+                    break;
             }
         })
         .catch(error => 
@@ -64,7 +70,8 @@ function getAllThemes()
   
     // Make a request to the server to get all users
     axios.get('/getAllThemes')
-      .then((response) => {
+      .then((response) => 
+      {
         const rows = response.data;
   
         // Populate the table with the retrieved rows
@@ -86,3 +93,55 @@ function getAllThemes()
         console.error(error);
       });
 }
+
+function populateParticipantsList()
+{
+    console.log("Participants being populated...");
+    var listParent = document.getElementById("submit-score-participants");
+
+    var username = sessionStorage.getItem("username");
+
+    // Make a request to the server to get all users
+    axios.get('/getAllUsers')
+    .then((response) => 
+    {
+        const rows = response.data;
+    
+        // Populate the table with the retrieved rows
+        rows.forEach((row) => 
+        {
+            if (row.username === username)
+                return;
+
+            var newOption = document.createElement("option");
+            newOption.text = row.username;
+            newOption.value = row.id;
+
+            listParent.appendChild(newOption);
+        });
+    })
+    .catch((error) => 
+    {
+        alert(error);
+        console.error(error);
+    });
+}
+
+function populateVoteFields()
+{
+    var voteFields = document.getElementsByClassName('vote-field');
+
+    for (let i = 0; i < voteFields.length; i++) 
+    {
+        const element = voteFields[i];
+        
+        for (let j = 1; j <= 10; j++) 
+        {
+            var newOption = document.createElement("option");
+            newOption.text = j;
+            newOption.value = j;      
+
+            element.appendChild(newOption);
+        }
+    }
+}   

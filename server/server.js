@@ -140,8 +140,6 @@ app.post('/logout', (req, res) =>
     res.status(200).json({ message: 'Logout successful' });
 });
 
-
-
 // Start the server
 app.listen(port, () => 
 {

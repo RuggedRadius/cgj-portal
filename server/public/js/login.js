@@ -43,6 +43,8 @@ function handleLogin(credentials)
             status.innerText = `LOGGED IN AS ${credentials.username}`;
             status.style.color = 'green';
 
+            sessionStorage.setItem("userName", credentials.username);
+
             // Redirect to another page
             showPageContents('home');
 

@@ -64,9 +64,9 @@ function getAllUsers()
     });
 }
 
-function login(username, password)
+function submitScore()
 {
-  
+    
 }
 
 exports.createUser = createUser;

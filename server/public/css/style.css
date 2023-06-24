@@ -151,7 +151,8 @@ form
 { 
   display: table; 
   width: 80%;
-  margin: auto;     
+  margin: auto;  
+  grid-template-columns: 200px 1fr;   
 }
 form p     
 { 

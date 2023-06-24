@@ -33,6 +33,7 @@ function createTables(db)
 {
     createTable_Users(db);
     createTable_Themes(db);
+    createTable_ScoreSubmissions(db);
 }
 
 function createTable_Users(db)
@@ -58,6 +59,25 @@ function createTable_Themes(db)
             "theme_description"	TEXT NOT NULL,
             "submitted_by"	INTEGER NOT NULL,
             PRIMARY KEY("theme_id" AUTOINCREMENT)
+        )
+        `
+    );
+}
+
+function createTable_ScoreSubmissions(db)
+{
+    db.exec
+    (
+        `
+        CREATE TABLE "scoreSubmissions" (
+            "scoreId"	INTEGER NOT NULL UNIQUE,
+            "submittedById"	INTEGER NOT NULL,
+            "participantId"	INTEGER NOT NULL,
+            "scoreGraphics"	INTEGER NOT NULL,
+            "scoreAudio"	INTEGER NOT NULL,
+            "scoreGameplay"	INTEGER NOT NULL,
+            "scoreThemeRelativity"	INTEGER NOT NULL,
+            PRIMARY KEY("scoreId" AUTOINCREMENT)
         )
         `
     );
